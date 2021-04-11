@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Welcome to Suggestr</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="webjars/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <!--<meta http-equiv="refresh" content="60; URL=/"> -->
+</head>
+<body>
+<div class="container">
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <h1 class="navbar-brand">Suggestr</h1>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#"><span th:text="${time}"></span></a>
+                </li>
+                <li><a href="#"><form action="/logout" method="POST">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                    <input type="submit" class="btn btn-default" value="Logout" />
+                </form></a></li>
+            </ul>
+        </div>
+    </nav>
+    <form action="/suggestion" method="POST">
+        <div class="row form-row">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+            <div class="col-md-4"><i class="fa fa-film"></i> Movies
+                <hr/>
+                <div id="movies" th:each="movie : ${movieSuggestions}">
+                    <div class="alert alert-info" role="alert">
+                        <strong th:text="${movie.createdBy}"></strong>
+                        <p th:text="${movie.suggestion}"></p>
+                    </div>
+                </div>
+                <textarea id="movieSuggestion" name="movieSuggestion" class="form-control" style="min-width: 100%"></textarea>
+            </div>
+            <div class="col-md-4"><i class="fa fa-music"></i> Music Albums
+                <hr/>
+                <div id="musicAlbums" th:each="musicAlbum : ${musicAlbumSuggestions}">
+                    <div class="alert alert-warning" role="alert">
+                        <strong th:text="${musicAlbum.createdBy}"></strong>
+                        <p th:text="${musicAlbum.suggestion}"></p>
+                    </div>
+                </div>
+                <textarea id="musicAlbumSuggestion" name="musicAlbumSuggestion" class="form-control" style="min-width: 100%"></textarea>
+            </div>
+            <div class="col-md-4"><i class="fa fa-gamepad"></i> Games
+                <hr/>
+                <div id="games" th:each="game : ${gameSuggestions}">
+                    <div class="alert alert-success" role="alert">
+                        <strong th:text="${game.createdBy}"></strong>
+                        <p th:text="${game.suggestion}"></p>
+                    </div>
+                </div>
+                <textarea id="gameSuggestion" name="gameSuggestion" class="form-control" style="min-width: 100%"></textarea>
+            </div>
+        </div>
+        <div class="row form-row">
+            <div class="col-md-4">
+                <input type="submit" class="btn btn-default" value="Save suggestions"/>
+            </div>
+        </div>
+    </form>
+    <footer class="fixed-bottom" style="position: fixed; bottom: 0">
+        <div class="container">
+            <span class="text-muted">Suggestr by CodeMerchant &copy;2021</span>
+        </div>
+    </footer>
+</div>
+</body>
+</html>

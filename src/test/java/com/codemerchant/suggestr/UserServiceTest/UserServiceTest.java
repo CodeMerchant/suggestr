@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.mockito.Mockito.*;
 
-@RunWith((SpringRunner.class))
+@RunWith(SpringRunner.class)
 public class UserServiceTest {
 
     @MockBean
